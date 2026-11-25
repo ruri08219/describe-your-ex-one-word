@@ -17,13 +17,20 @@ import os
 import sys
 
 WORD = "podcaster"
+MAX_LEN = 111
 
 
 def main() -> int:
     word = WORD.strip()
-    if not word or len(word) > 111 or any(ch.isspace() for ch in word):
+    if not word or len(word) > MAX_LEN or any(ch.isspace() for ch in word):
         print(
             "error: WORD must be 1-111 chars, a single token with no whitespace",
+            file=sys.stderr,
+        )
+        return 1
+    if not word.isalpha():
+        print(
+            "error: WORD must be a single alphabetic word",
             file=sys.stderr,
         )
         return 1
